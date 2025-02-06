@@ -14,7 +14,7 @@ class AuthController extends Controller
         try {
             $fields = $request->validate([
                 'firstName' => 'required|string',
-                'surName' => 'required|string',
+                'lastName' => 'required|string',
                 'middleName' => 'string',
                 'phoneNumber' => 'string',
                 'email' => 'required|string|unique:users,email',
@@ -23,7 +23,7 @@ class AuthController extends Controller
 
             $user = User::create([
                 'firstName' => $fields['firstName'],
-                'surName' => $fields['surName'],
+                'lastName' => $fields['lastName'],
                 'middleName' => $fields['middleName'],
                 'phoneNumber' => $fields['phoneNumber'],
                 'email' => $fields['email'],
@@ -42,7 +42,7 @@ class AuthController extends Controller
             return response()->json(['errors' => $e->errors()], 422);
         } catch (\Exception $e) {
             // Handle any other exceptions
-            return response()->json(['error' => 'An unexpected error occurred. Please try again later.'], 500);
+            return response()->json(['error' => $e], 500);
         }
     }
 
