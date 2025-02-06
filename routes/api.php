@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\schoolController;
 use App\Http\Controllers\ProductController;
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -23,3 +24,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::put('/updateuser/{id}', [AuthController::class, 'updateUser']);
 
 });
+
+//protected routes for school creartion
+
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::post('/createschools', [schoolController::class, 'store']);});
